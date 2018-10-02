@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<!--
+ * @file     DisplayPresentation.html
+ * @author   Oudayan Dutta
+ * @version  1.0
+ * @date     31 janvier 2018
+ * @brief    Page des catégories et présentations
+ * @details  Page où toutes les présentations sont affichés par catégories, avec formulaire pour ajout/supression de présentations/catégories
+ -->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="//code.jquery.com/ui/1.10.4/themes/eggplant/jquery-ui.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+    <title>BigBang - Gestion de présentations</title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+</head>
+<body>
+    <header class="container-fluid text-center py-3">
+        <h1>BigBang</h1>
+        <h2>Gestion de présentations</h2>
+    </header>
+    <main class="container">
+        <div id="entry_form" class="my-3">
+            <div class="d-flex flex-row flex-wrap justify-content-between align-items-center">
+                <h2>Sujet des présentations</h2>
+                <button type="button" class="btn btn-primary my-4" id="AddPresentation">Ajouter une présentation</button>
+            </div>
+            <div class="modal fade row" id="entry-form-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <form method="get" action="index.php?Presentations&action=displayPresentations">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="entry-form-modal-title">Ajout d'une présentation</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </div>
+                            <div class="modal-body mx-sm-1 mx-md-3 mx-lg-5">
+                                <input type="hidden" id="PresentationId" value="0">
+                                <div class="form-group row">
+                                    <label for="Title" class="col-md-2 col-form-label">Titre</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" id="Title" placeholder="Titre">
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-5">
+                                    <label for="Description" class="col-md-2 col-form-label">Résumé</label>
+                                    <div class="col-md-10">
+                                        <textarea class="form-control" id="Description" rows="5" placeholder="Résumé"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="CategoryId" class="col-md-2 col-form-label">Catégorie</label>
+                                    <div class="col-md-10">
+                                        <select class="form-control" id="CategoryId">
+                                        </select>
+                                    </div>
+                                </div>                                
+                                <div class="form-group row">
+                                    <div class="form-group col-md-8">
+                                        <div class="form-group row">
+                                            <label for="NewCategory" class="col-sm-3 col-form-label">OU</label>
+                                            <div class="input-group col-sm-9">
+                                                <input type="text" id="NewCategory" placeholder="Nouvelle catégorie" class="form-control input-lg" />
+                                                <span class="input-group-btn"><button id="AddCategory" type="button" class="btn btn-primary" disabled>Ajouter</button></span>
+                                            </div>                                    
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 d-flex justify-content-between">
+                                        <button id="UpdateCategory" type="button" class="btn btn-mod invisible ml-md-1 ml-lg-0 ml-xl-5">Modifier</button>
+                                        <button id="SaveUpdate" type="button" class="btn btn-mod hidden ml-md-1 ml-lg-0 ml-xl-5">Sauvegarder</button>
+                                        <button id="ConfirmDeleteCategory" type="button" class="btn btn-danger invisible">Supprimer</button>
+                                    </div>
+                                </div>
+                                <div class="collapse row mb-5 px-3" id="DeleteCategoryCollapse">
+                                    <div class="card card-block col-md-10 offset-md-2">
+                                        <div id="DeletedPresentations" class="p-2">
+                                        </div>
+                                        <div class="d-flex flex-row justify-content-between my-2">
+                                            <button id="CancelDeleteCategory" type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#DeleteCategoryCollapse" aria-expanded="false" aria-controls="DeleteCategoryCollapse">Annuler</button>
+                                            <button id="DeleteCategory" type="button" class="btn btn-danger">Supprimer</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row hidden">
+                                    <label for="SortOrder" class="col-md-2 col-form-label">Ordre</label>
+                                    <div class="col-md-10">
+                                        <select class="form-control" id="SortOrder">
+                                        </select>
+                                    </div>
+                                </div>                                
+                                <div class="form-group row">
+                                    <div class="col-xl-6">
+                                        <div class="form-group row">
+                                            <label for="StartDate" class="col-xl-4 col-md-2 col-form-label">Date</label>
+                                            <div class="form-group col-xl-8 col-md-10">
+                                                <input type="date" class="form-control" id="StartDate">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <div class="form-group row">
+                                            <label for="StartTime" class="col-md-2 col-form-label">Début</label>
+                                            <div class="form-group col-md-4">
+                                                <input type="time" class="form-control" id="StartTime">
+                                            </div>
+                                            <label for="EndTime" class="col-md-2 col-form-label">Fin</label>
+                                            <div class="form-group col-md-4">
+                                                <input type="time" class="form-control" id="EndTime">
+                                            </div>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="form-group row">
+                                    <label for="Location" class="col-md-2 col-form-label">Emplacement</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" id="Location" placeholder="Emplacement">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="Animator" class="col-md-2 col-form-label">Animateur</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" id="Animator" placeholder="Animateur">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="Institution" class="col-md-2 col-form-label">Institution</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" id="Institution" placeholder="Institution">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                <button type="button" id="SavePresentation" class="btn btn-primary" data-dismiss="modal" disabled>Sauvegarder</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div id="display_presentations" class="section_accordion my-3"> -->
+        <div id="display_presentations">
+            <?php
+            /*foreach ($data["categories"] as $category) {
+                echo '<section class="section_sortable">
+                    <h2 class="section_title p-1">' . $category->Description . '</h2>
+                    <div class="article_accordion">';
+                    foreach ($data["presentations"] as $presentation) {
+                        if ($category->Id == $presentation->CategoryId) {
+                            echo '<article class="article_sortable ml-3">
+                                <h3 class="article_title p-1">' . $presentation->Title . '</h3>
+                                <div class="article_content p-1 ml-3">' . 
+                                    $presentation->Description . '<br>' . 
+                                    $presentation->StartDate . '<br>' . 
+                                    $presentation->StartTime . '<br>' . 
+                                    $presentation->EndTime . '<br>' . 
+                                    $presentation->Location . '<br>' . 
+                                    $presentation->Animator . '<br>' .
+                                    $presentation->Institution . '<br>' . 
+                                '</div>
+                            </article>';
+                        }
+                    }
+                    echo '</div>
+                </section>';
+             }*/
+            ?>
+        </div>
+    </main>
+    <footer class="container-fluid">
+    </footer>
+
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/presentation.js"></script>
+
+</body>
+
+</html>

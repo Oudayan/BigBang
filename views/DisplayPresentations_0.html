@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+    <title>Gestion des présentations</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.section_accordion').accordion({
+                collapsible: true,
+                active: false,
+                heightStyle: "content",
+                header: 'h2'
+            }).sortable({
+                items: '.section_sortable',
+                placeholder: "section_highlight"
+            });
+            $('.article_accordion').accordion({
+                collapsible: true,
+                active: false,
+                heightStyle: "content",
+                header: 'h3'
+            }).sortable({
+                items: '.article_sortable',
+                placeholder: "article_highlight"
+            });
+        });
+
+    </script>
+</head>
+
+<body>
+    <header class="container-fluid text-center py-3">
+        <h1>Gestion des présentations</h1>
+    </header>
+    <main class="container">
+        <div id="entry_form" class="my-3">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#entry-form-modal">Ajouter une présentation</button>
+            <div class="modal fade row" id="entry-form-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Présentation</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group row">
+                                    <label for="Title" class="col-md-2 col-form-label">Titre</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" id="Title" placeholder="Titre">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="Description" class="col-md-2 col-form-label">Résumé</label>
+                                    <div class="col-md-10">
+                                        <textarea class="form-control" id="Description" rows="3" placeholder="Résumé"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="Category" class="col-md-2 col-form-label">Catégorie</label>
+                                    <div class="col-md-4">
+                                        <select class="form-control" id="Category">
+                                              <option value="1">1</option>
+                                              <option value="2">2</option>
+                                              <option value="3">3</option>
+                                              <option value="4">4</option>
+                                              <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <div class="form-group row">
+                                            <label for="NewCategory" class="col-sm-2 col-form-label">OU</label>
+                                            <div class="input-group col-sm-10">
+                                                <input type="text" id="NewCategory" name="NewCategory" placeholder="Nouvelle catégorie" class="form-control input-lg" />
+                                                <span class="input-group-btn"><button type="button" class="btn btn-primary">Ajouter</button></span>
+                                            </div>                                    
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group row">
+                                    <label for="StartDate" class="col-md-2 col-form-label">Date</label>
+                                    <div class="form-group col-md-4">
+                                        <input type="date" class="form-control" id="StartDate" min="2018-01-20">
+                                    </div>
+                                    <label for="StartTime" class="col-md-1 col-form-label">Début</label>
+                                    <div class="form-group col-md-2">
+                                        <input type="time" class="form-control" id="StartTime" value="12:00">
+                                    </div>
+                                    <label for="EndTime" class="col-md-1 col-form-label">Fin</label>
+                                    <div class="form-group col-md-2">
+                                        <input type="time" class="form-control" id="EndTime" value="15:00">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="Location" class="col-md-2 col-form-label">Emplacement</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" id="Location" placeholder="Emplacement">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="Animator" class="col-md-2 col-form-label">Animateur</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" id="Animator" placeholder="Animateur">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="Institution" class="col-md-2 col-form-label">Institution</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" id="Institution" placeholder="Institution">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="Order" class="col-md-2 col-form-label">Ordre de tri</label>
+                                    <div class="col-md-10">
+                                        <select class="form-control" id="Order">
+                                              <option value="1">1</option>
+                                              <option value="2">2</option>
+                                              <option value="3">3</option>
+                                              <option value="4">4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuller</button>
+                            <button type="button" class="btn btn-primary">Sauvegarder</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section_accordion my-3">
+            <section class="section_sortable">
+                <h2 class="section_title p-1">Catégorie 1</h2>
+                <div class="article_accordion">
+                    <article class="article_sortable ml-3">
+                        <h3 class="article_title p-1">Présentation 1</h3>
+                        <div class="article_content p-1 ml-3">
+                            <p>1 - Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</p>
+                        </div>
+                    </article>
+                    <article class="article_sortable ml-3">
+                        <h3 class="article_title p-1">Présentation 2</h3>
+                        <div class="article_content p-1 ml-3">
+                            <p>2 - Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</p>
+                        </div>
+                    </article>
+                    <article class="article_sortable ml-3">
+                        <h3 class="article_title p-1">Présentation 3</h3>
+                        <div class="article_content p-1 ml-3">
+                            <p>3 - Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</p>
+                        </div>
+                    </article>
+                    <article class="article_sortable ml-3">
+                        <h3 class="article_title p-1">Présentation 4</h3>
+                        <div class="article_content p-1 ml-3">
+                            <p>4 - Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+            <section class="section_sortable">
+                <h2 class="section_title p-1">Catégorie 2</h2>
+                <div class="article_accordion">
+                    <article class="article_sortable ml-3">
+                        <h3 class="article_title p-1">Présentation 5</h3>
+                        <div class="article_content p-1 ml-3">
+                            <p>5 - Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In suscipit faucibus urna.</p>
+                        </div>
+                    </article>
+                    <article class="article_sortable ml-3">
+                        <h3 class="article_title p-1">Présentation 6</h3>
+                        <div class="article_content p-1 ml-3">
+                            <p>6 - Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In suscipit faucibus urna.</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+            <section class="section_sortable">
+                <h2 class="section_title p-1">Catégorie 3</h2>
+                <div class="article_accordion">
+                    <article class="article_sortable ml-3">
+                        <h3 class="article_title p-1">Présentation 7</h3>
+                        <div class="article_content p-1 ml-3">
+                            <p>7 - Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.</p>
+                        </div>
+                    </article>
+                    <article class="article_sortable ml-3">
+                        <h3 class="article_title p-1">Présentation 8</h3>
+                        <div class="article_content p-1 ml-3">
+                            <p>8 - Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.</p>
+                        </div>
+                    </article>
+                    <article class="article_sortable ml-3">
+                        <h3 class="article_title p-1">Présentation 9</h3>
+                        <div class="article_content p-1 ml-3">
+                            <p>9 - Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+            <section class="section_sortable">
+                <h2 class="section_title p-1">Catégorie 4</h2>
+                <div class="article_accordion">
+                    <article class="article_sortable ml-3">
+                        <h3 class="article_title p-1">Présentation 10</h3>
+                        <div class="article_content p-1 ml-3">
+                            <p>10 - Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia mauris vel est.</p>
+                            <p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+                        </div>
+                    </article>
+                    <article class="article_sortable ml-3">
+                        <h3 class="article_title p-1">Présentation 11</h3>
+                        <div class="article_content p-1 ml-3">
+                            <p>11 - Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia mauris vel est.</p>
+                            <p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+                        </div>
+                    </article>
+                    <article class="article_sortable ml-3">
+                        <h3 class="article_title p-1">Présentation 12</h3>
+                        <div class="article_content p-1 ml-3">
+                            <p>12 - Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia mauris vel est.</p>
+                            <p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer class="container-fluid">
+    </footer>
+
+    <script src="../js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
